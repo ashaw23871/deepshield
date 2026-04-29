@@ -1,1 +1,1 @@
-{"deploy": {"startCommand": "uvicorn main:app --host 0.0.0.0 --port $PORT"}}
+{"deploy": {"startCommand": "python -c \"from torchvision.models import resnet18, ResNet18_Weights; resnet18(weights=ResNet18_Weights.DEFAULT)\" && uvicorn main:app --host 0.0.0.0 --port $PORT"}}
