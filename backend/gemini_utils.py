@@ -1,15 +1,6 @@
 """
 gemini_utils.py — Google Gemini integration for DeepShield.
-
-Uses the Gemini 1.5 Flash model to generate a concise, human-readable
-explanation of the deepfake analysis result. This satisfies the Google
-Solution Challenge requirement to integrate a Google AI product.
-
-Setup:
-    pip install google-generativeai
-    export GEMINI_API_KEY="your-key-here"
-
-Get a free key at: https://aistudio.google.com/app/apikey
+Uses the new google-genai package (replaces deprecated google-generativeai).
 """
 
 from __future__ import annotations
@@ -19,13 +10,12 @@ import logging
 
 logger = logging.getLogger("deepshield.gemini")
 
-# Lazy import so the app still runs if the package isn't installed
 try:
-    import google.generativeai as genai
+    from google import genai
     _GEMINI_AVAILABLE = True
 except ImportError:
     _GEMINI_AVAILABLE = False
-    logger.warning("google-generativeai not installed. Gemini explanations disabled.")
+    logger.warning("google-genai not installed. Gemini explanations disabled.")
 
 
 def get_gemini_explanation(
@@ -33,30 +23,17 @@ def get_gemini_explanation(
     score: float,
     breakdown: dict[str, float],
 ) -> str | None:
-    """
-    Call Gemini 1.5 Flash to generate a plain-English explanation of the
-    analysis result, tailored for sports journalists and media consumers.
 
-    Returns None gracefully if the API key is missing or the call fails,
-    so the rest of the analysis is never blocked.
-    """
     api_key = os.environ.get("GEMINI_API_KEY")
 
     if not _GEMINI_AVAILABLE:
-        return (
-            "Gemini explanation unavailable — install 'google-generativeai' "
-            "and set GEMINI_API_KEY to enable this feature."
-        )
+        return "Gemini explanation unavailable — install 'google-genai' and set GEMINI_API_KEY."
 
     if not api_key:
-        return (
-            "Gemini explanation unavailable — set the GEMINI_API_KEY "
-            "environment variable to enable this feature."
-        )
+        return "Gemini explanation unavailable — set the GEMINI_API_KEY environment variable."
 
     try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        client = genai.Client(api_key=api_key)
 
         breakdown_text = "\n".join(
             f"  - {k.replace('_', ' ').title()}: {v}/100"
@@ -79,7 +56,10 @@ that drove the verdict. Use plain English — no jargon. Do not mention specific
 model names or internal variable names. End with a practical recommendation 
 (e.g., "We recommend seeking original broadcast footage before publishing.")"""
 
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=prompt,
+        )
         return response.text.strip()
 
     except Exception as e:
