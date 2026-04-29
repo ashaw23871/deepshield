@@ -125,7 +125,7 @@ export default function App() {
     formData.append("file", file);
     setLoading(true);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/analyze", formData);
+      const res = await axios.post("https://deepshield-production-3f11.up.railway.app/analyze", formData);
       setResult(res.data);
     } catch (err) {
       console.error(err);
