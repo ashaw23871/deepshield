@@ -283,7 +283,7 @@ export default function App() {
         )}
 
         <p className="footer-note">
-          Powered by ResNet-18 · OpenCV · Google Gemini 1.5 Flash
+          Powered by ResNet-18 · OpenCV · Google Gemini 1.5 Flash · v1.0
         </p>
       </div>
     </div>
