@@ -39,7 +39,7 @@ User Upload (video/image)
 │
 └──► 💬 Google Gemini 1.5 Flash
        └── Plain-English explanation for journalists
-
+```
 ## ✅ Google Technology Used
 
 | Technology | Role |
