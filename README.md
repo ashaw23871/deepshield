@@ -20,6 +20,7 @@ AI-generated deepfakes of sporting moments — fake goals, fabricated fouls, sta
 
 ## 🏗️ Architecture
 
+```text
 User Upload (video/image)
 │
 ▼
@@ -28,17 +29,16 @@ User Upload (video/image)
 └───────────────────┘
 │
 ├──► 🔬 Forensic Pipeline (OpenCV)
-│       ├── Sharpness analysis (Laplacian variance)
-│       ├── Compression artifact detection (DCT)
-│       ├── Temporal consistency (optical flow)
-│       └── Face presence consistency (Haar cascades)
+│      ├── Sharpness analysis (Laplacian variance)
+│      ├── Compression artifact detection (DCT)
+│      ├── Temporal consistency (optical flow)
+│      └── Face presence consistency (Haar cascades)
 │
 ├──► 🤖 AI Deepfake Detector (PyTorch ResNet-18)
-│       └── Per-face binary classification
+│      └── Per-face binary classification
 │
 └──► 💬 Google Gemini 1.5 Flash
-└── Plain-English explanation for journalists
----
+       └── Plain-English explanation for journalists
 
 ## ✅ Google Technology Used
 
