@@ -64,4 +64,4 @@ model names or internal variable names. End with a practical recommendation
 
     except Exception as e:
         logger.warning(f"Gemini API call failed: {e}")
-        return f"Gemini explanation temporarily unavailable: {str(e)}"
+        return f"Gemini explanation temporarily unavailable: {type(e).__name__}"
