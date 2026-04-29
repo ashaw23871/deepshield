@@ -16,7 +16,7 @@ logger = logging.getLogger("deepshield.video_utils")
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
 
-def extract_frames(file_path: str, max_frames: int = 30) -> List[np.ndarray]:
+def extract_frames(file_path: str, max_frames: int = 10) -> List[np.ndarray]:
     """
     Extract up to `max_frames` evenly-spaced frames from a video,
     or return a single frame list for image files.

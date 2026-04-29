@@ -107,7 +107,7 @@ def normalize(value: float, min_val: float, max_val: float) -> float:
 # ── Main analysis ─────────────────────────────────────────────────────────────
 
 def analyze_video(video_path: str) -> Dict[str, object]:
-    frames = extract_frames(video_path, max_frames=30)
+    frames = extract_frames(video_path, max_frames=10)
 
     if not frames:
         raise ValueError("No frames could be extracted from the video.")
