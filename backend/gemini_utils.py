@@ -56,7 +56,7 @@ def get_gemini_explanation(
 
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        model = genai.GenerativeModel("gemini-2.0-flash")
 
         breakdown_text = "\n".join(
             f"  - {k.replace('_', ' ').title()}: {v}/100"
