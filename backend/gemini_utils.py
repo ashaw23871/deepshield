@@ -57,11 +57,11 @@ model names or internal variable names. End with a practical recommendation
 (e.g., "We recommend seeking original broadcast footage before publishing.")"""
 
         response = client.models.generate_content(
-            model="gemini-1.5-flash-8b",
+            model="gemini-1.5-pro",
             contents=prompt,
         )
         return response.text.strip()
 
     except Exception as e:
         logger.warning(f"Gemini API call failed: {e}")
-        return f"Gemini explanation temporarily unavailable: {str(e)}"
+        return "AI explanation temporarily unavailable due to high demand. The authenticity score and signal breakdown above provide the full analysis."
